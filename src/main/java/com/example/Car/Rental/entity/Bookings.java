@@ -28,5 +28,8 @@ public class Bookings {
     private String destination;
     @Column(nullable = false)
     private Long charge;
-
+    @OneToOne()
+    private Customers customer;
+    @OneToOne()
+    private Cars car;
 }

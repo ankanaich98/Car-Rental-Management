@@ -21,6 +21,6 @@ public class Users {
     @Column(nullable = false, length = 25)
     private String password;
     @ManyToOne()
-    @Column(nullable = false)
-    private Long branchId;
+    @JoinColumn(referencedColumnName = "id")
+    private Branches branch;
 }

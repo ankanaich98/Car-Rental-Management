@@ -34,7 +34,7 @@ create table users(
                       id bigint primary key not null auto_increment,
                       name varchar(25),
                       password varchar(25),
-                      branch bigint,
-                      foreign key(branch) references branches(id),
+                      branch_id bigint,
+                      foreign key(branch_id) references branches(id),
                       role enum('ROLE_USER','ROLE_ADMIN')
 );
