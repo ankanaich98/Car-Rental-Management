@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "bookings")
-public class Bookings {
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +29,7 @@ public class Bookings {
     @Column(nullable = false)
     private Long charge;
     @OneToOne()
-    private Customers customer;
+    private Customer customer;
     @OneToOne()
-    private Cars car;
+    private Car car;
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,5 +22,5 @@ public class Users {
     private String password;
     @ManyToOne()
     @JoinColumn(referencedColumnName = "id")
-    private Branches branch;
+    private Branch branch;
 }
