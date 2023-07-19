@@ -2,8 +2,10 @@ package com.example.Car.Rental;
 
 import com.example.Car.Rental.entity.Branch;
 import com.example.Car.Rental.entity.Car;
+import com.example.Car.Rental.entity.Customer;
 import com.example.Car.Rental.repository.BranchRepository;
 import com.example.Car.Rental.repository.CarRepository;
+import com.example.Car.Rental.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +16,8 @@ class CarRentalApplicationTests {
 	private BranchRepository branchRepository;
 	@Autowired
 	private CarRepository carRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
 
 	@Test
 	void contextLoads() {
@@ -33,6 +37,15 @@ class CarRentalApplicationTests {
 		car.setYear("2000");
 		car.setRate(5000L);
 		carRepository.save(car);
+	}
+	@Test
+	public void addNewCustomer(){
+		Customer customer = new Customer();
+		customer.setName("Ankan Aich");
+		customer.setLicense("888221");
+		customer.setContact("01845682170");
+		customer.setEmail("ankan98aich@gmail.com");
+		customerRepository.save(customer);
 	}
 
 }
