@@ -20,7 +20,7 @@ public class BranchController {
         this.branchService = branchService;
     }
     @GetMapping("/branches")
-    public String showUserList(Model model){
+    public String showBranchList(Model model){
         List<Branch> listAllBranches = branchService.listAllBranches();
         model.addAttribute("branches",listAllBranches);
         return "branches";
@@ -44,7 +44,7 @@ public class BranchController {
             return "addBranch";
     }
     @GetMapping("/branch/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id){
+    public String deleteBranch(@PathVariable("id") Long id){
         branchService.delete(id);
         return "redirect:/branches";
     }
