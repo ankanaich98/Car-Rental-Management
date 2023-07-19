@@ -2,7 +2,8 @@ create database db_car_rental;
 use db_car_rental;
 create table branches(
                          id bigint primary key not null auto_increment,
-                         location varchar(50)
+                         name varchar(50),
+                         address varchar(200)
 );
 create table customers(
                           id bigint primary key not null auto_increment,
@@ -14,6 +15,7 @@ create table cars(
                      id bigint primary key not null auto_increment,
                      make varchar(20),
                      model varchar(20),
+                     year varchar(10),
                      rate double,
                      availability boolean
 );
