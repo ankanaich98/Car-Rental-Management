@@ -30,6 +30,7 @@ class CarRentalApplicationTests {
 		Car car = new Car();
 		car.setMake("Nissan");
 		car.setModel("GTR");
+		car.setYear("2000");
 		car.setRate(5000L);
 		carRepository.save(car);
 	}

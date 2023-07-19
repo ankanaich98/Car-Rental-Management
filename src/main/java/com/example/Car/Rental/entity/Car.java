@@ -20,6 +20,8 @@ public class Car {
     private String make;
     @Column(nullable = false,length = 20)
     private String model;
+    @Column(nullable = false,length = 10)
+    private String year;
     @Column(nullable = false)
     private Long rate;
 }
