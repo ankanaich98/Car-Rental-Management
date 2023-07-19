@@ -8,6 +8,7 @@ create table branches(
 create table customers(
                           id bigint primary key not null auto_increment,
                           name varchar(50),
+                          license varchar(10),
                           contact varchar(14),
                           email varchar(25)
 );
