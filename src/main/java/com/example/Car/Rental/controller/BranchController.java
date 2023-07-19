@@ -23,10 +23,12 @@ public class BranchController {
     public String showBranchList(Model model){
         List<Branch> listAllBranches = branchService.listAllBranches();
         model.addAttribute("branches",listAllBranches);
+        model.addAttribute("formTitle", "Branch List");
         return "branches";
     }
     @GetMapping("/branch/show-form")
     public String showForm(Model model){
+        model.addAttribute("formTitle", "Branch Entry");
         model.addAttribute("branches", new Branch());
         return "addBranch";
     }
