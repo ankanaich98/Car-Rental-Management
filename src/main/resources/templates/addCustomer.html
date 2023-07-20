@@ -24,7 +24,7 @@
             Customer Entry Form
           </div>
           <div class="card-body">
-            <form th:action="@{/customer/save}" th:object="${customers}" method="post" style="max-width: 500px; margin: 0 auto;">
+            <form th:action="@{/customer/save}" th:object="${customers}" method="post">
               <input type="hidden" th:field="*{id}">
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label"> Name:</label>

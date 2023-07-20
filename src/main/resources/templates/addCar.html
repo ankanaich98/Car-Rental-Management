@@ -24,8 +24,7 @@
                         Car Entry Form
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/car/save}" th:object="${cars}" method="post"
-                              style="max-width: 500px; margin: 0 auto;">
+                        <form th:action="@{/car/save}" th:object="${cars}" method="post">
                             <input type="hidden" th:field="*{id}">
 
                             <div class="form-group row">
