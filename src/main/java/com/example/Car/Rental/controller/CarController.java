@@ -25,11 +25,13 @@ public class CarController {
     public String showCarList(Model model){
         List<Car> listAllCars = carService.listAllCars();
         model.addAttribute("cars",listAllCars);
+        model.addAttribute("formTitle", "Car List");
         return "cars";
     }
     @GetMapping("/car/show-form")
     public String showForm(Model model){
         model.addAttribute("cars", new Car());
+        model.addAttribute("formTitle", "Car Entry");
         return "addCar";
     }
     @PostMapping("car/save")

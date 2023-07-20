@@ -23,11 +23,13 @@ public class CustomerController {
     private String showCustomerList(Model model){
         List<Customer> listAllCustomers = customerService.listAllCustomers();
         model.addAttribute("customers",listAllCustomers);
+        model.addAttribute("formTitle","Customer List");
         return "customers";
     }
     @GetMapping("/customer/show-form")
     private String showForm(Model model){
         model.addAttribute("customers",new Customer());
+        model.addAttribute("formTitle","Customer Entry");
         return "addCustomer";
     }
     @PostMapping("/customer/save")

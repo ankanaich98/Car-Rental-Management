@@ -28,8 +28,8 @@ public class BranchController {
     }
     @GetMapping("/branch/show-form")
     public String showForm(Model model){
-        model.addAttribute("formTitle", "Branch Entry");
         model.addAttribute("branches", new Branch());
+        model.addAttribute("formTitle", "Branch Entry");
         return "addBranch";
     }
 
