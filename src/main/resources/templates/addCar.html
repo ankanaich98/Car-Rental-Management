@@ -60,17 +60,23 @@
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label"> Availability:</label>
+                                <label class="col-sm-4 col-form-label"> Rate:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" th:field="*{availability}" class="form-control" required
-                                           minlength="2" maxlength="20"/>
+                                    <input type="text" th:field="*{rate}" class="form-control" required/>
                                 </div>
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label"> Rate:</label>
+                                <label class="col-sm-4 col-form-label"> Availability:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" th:field="*{rate}" class="form-control" required/>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" th:field="*{availability}" id="availability1" value="1">
+                                        <label class="form-check-label" for="availability1">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" th:field="*{availability}" id="availability2" value="0">
+                                        <label class="form-check-label" for="availability2">No</label>
+                                    </div>
                                 </div>
                             </div>
                             <br>

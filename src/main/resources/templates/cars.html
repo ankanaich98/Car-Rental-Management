@@ -65,7 +65,7 @@
                 [[${car.registration}]]
               </td>
               <td>
-                [[${car.availability}]]
+                <th:block th:text="${car.availability} ? 'Yes' : 'No'"></th:block>
               </td>
               <td>
                 [[${car.rate}]]
