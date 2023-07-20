@@ -17,6 +17,7 @@ create table cars(
                      make varchar(20),
                      model varchar(20),
                      year varchar(10),
+                     registration varchar(10),
                      rate double,
                      availability boolean
 );

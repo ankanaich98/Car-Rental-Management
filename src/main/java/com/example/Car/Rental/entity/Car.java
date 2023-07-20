@@ -22,6 +22,10 @@ public class Car {
     private String model;
     @Column(nullable = false,length = 10)
     private String year;
+    @Column(nullable = false,length =10)
+    private String registration;
+    @Column(nullable = false)
+    private boolean availability;
     @Column(nullable = false)
     private Long rate;
 }
