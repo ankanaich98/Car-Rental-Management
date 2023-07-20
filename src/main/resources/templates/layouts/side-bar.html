@@ -7,17 +7,41 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsBranches" aria-expanded="false" aria-controls="collapseLayoutsBranches">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Mange Branch
+                    Manage Branch
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse" id="collapseLayoutsBranches" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" th:href="@{/branches}">Branches</a>
                         <a class="nav-link" th:href="@{/branch/show-form}">Add New Branch</a>
                     </nav>
                 </div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCars" aria-expanded="false" aria-controls="collapseLayoutsCars">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Manage Car
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayoutsCars" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" th:href="@{/cars}">Cars</a>
+                        <a class="nav-link" th:href="@{/car/show-form}">Add New Car</a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCustomers" aria-expanded="false" aria-controls="collapseLayoutsCustomers">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Manage Customer
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayoutsCustomers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" th:href="@{/customers}">Customers</a>
+                        <a class="nav-link" th:href="@{/customer/show-form}">Add New Customer</a>
+                    </nav>
+                </div>
+
+
             </div>
         </div>
     </nav>
