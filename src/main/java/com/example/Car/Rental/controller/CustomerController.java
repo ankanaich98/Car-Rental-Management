@@ -35,8 +35,8 @@ public class CustomerController {
     }
     @PostMapping("/customer/save")
     private String saveForm(Customer customer,RedirectAttributes redirectAttributes){
+        String Message = (customer.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
         customerService.save(customer);
-        String Message ="Entry created Successfully";
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/customers";
     }

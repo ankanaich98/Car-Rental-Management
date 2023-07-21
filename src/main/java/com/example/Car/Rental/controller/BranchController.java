@@ -36,8 +36,8 @@ public class BranchController {
 
     @PostMapping("/branch/save")
     public String saveForm(Branch branch, RedirectAttributes redirectAttributes) {
+        String Message = (branch.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
         branchService.save(branch);
-        String Message ="Entry created Successfully";
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/branches";
     }

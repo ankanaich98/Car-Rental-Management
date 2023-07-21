@@ -37,8 +37,8 @@ public class CarController {
     }
     @PostMapping("car/save")
     public String saveForm(Car car,RedirectAttributes redirectAttributes) {
+        String Message = (car.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
         carService.save(car);
-        String Message ="Entry created Successfully";
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/cars";
     }
