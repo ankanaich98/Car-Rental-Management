@@ -12,6 +12,10 @@
   <div class="container-fluid px-4">
 
     <h1 class="mt-4" th:text="${formTitle}">Dashboard</h1>
+    <div th:if="${Message != null}" class="alert alert-success" role="alert">
+      <span th:text="${Message}"></span>
+    </div>
+
     <ol class="breadcrumb mb-4">
       <li class="breadcrumb-item active" th:text="${formTitle}">Dashboard</li>
     </ol>

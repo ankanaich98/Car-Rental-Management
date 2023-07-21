@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -35,8 +36,10 @@ public class CarController {
         return "addCar";
     }
     @PostMapping("car/save")
-    public String saveForm(Car car) {
+    public String saveForm(Car car,RedirectAttributes redirectAttributes) {
         carService.save(car);
+        String Message ="Entry created Successfully";
+        redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/cars";
     }
     @GetMapping("/car/edit/{id}")
@@ -46,8 +49,10 @@ public class CarController {
         return "addCar";
     }
     @PostMapping("/car/delete/{id}")
-    public String deleteCar(@PathVariable("id") Long id){
+    public String deleteCar(@PathVariable("id") Long id,RedirectAttributes redirectAttributes){
         carService.delete(id);
+        String Message ="Entry deleted Successfully";
+        redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/cars";
     }
 

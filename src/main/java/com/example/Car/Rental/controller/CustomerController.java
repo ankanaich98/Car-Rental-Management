@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -33,8 +34,10 @@ public class CustomerController {
         return "addCustomer";
     }
     @PostMapping("/customer/save")
-    private String saveForm(Customer customer){
+    private String saveForm(Customer customer,RedirectAttributes redirectAttributes){
         customerService.save(customer);
+        String Message ="Entry created Successfully";
+        redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/customers";
     }
 
@@ -45,8 +48,10 @@ public class CustomerController {
         return "addCustomer";
     }
     @PostMapping("/customer/delete/{id}")
-    private String deleteCustomer(@PathVariable("id") Long id){
+    private String deleteCustomer(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
       customerService.delete(id);
+        String Message ="Entry deleted Successfully";
+        redirectAttributes.addFlashAttribute("Message",Message);
       return "redirect:/customers";
     }
 
