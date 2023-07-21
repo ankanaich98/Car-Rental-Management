@@ -45,7 +45,7 @@ public class BranchController {
 //            model.addAttribute("addBranch","Edit Branch (ID " +id+")" );
             return "addBranch";
     }
-    @GetMapping("/branch/delete/{id}")
+    @PostMapping("/branch/delete/{id}")
     public String deleteBranch(@PathVariable("id") Long id){
         branchService.delete(id);
         return "redirect:/branches";

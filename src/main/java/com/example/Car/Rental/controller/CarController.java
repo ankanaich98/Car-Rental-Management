@@ -45,7 +45,7 @@ public class CarController {
         model.addAttribute("cars", cars);
         return "addCar";
     }
-    @GetMapping("/car/delete/{id}")
+    @PostMapping("/car/delete/{id}")
     public String deleteCar(@PathVariable("id") Long id){
         carService.delete(id);
         return "redirect:/cars";

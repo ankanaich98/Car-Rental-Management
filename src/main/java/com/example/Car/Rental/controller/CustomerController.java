@@ -44,7 +44,7 @@ public class CustomerController {
         model.addAttribute("customers",customers);
         return "addCustomer";
     }
-    @GetMapping("/customer/delete/{id}")
+    @PostMapping("/customer/delete/{id}")
     private String deleteCustomer(@PathVariable("id") Long id){
       customerService.delete(id);
       return "redirect:/customers";
