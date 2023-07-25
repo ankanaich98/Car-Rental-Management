@@ -40,6 +40,17 @@
                         <a class="nav-link" th:href="@{/customer/show-form}">Add New Customer</a>
                     </nav>
                 </div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsBookings" aria-expanded="false" aria-controls="collapseLayoutsCustomers">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Manage Booking
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayoutsBookings" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" th:href="@{/bookings}">Bookings</a>
+                        <a class="nav-link" th:href="@{/booking/show-form}">Add New Booking</a>
+                    </nav>
+                </div>
 
 
             </div>

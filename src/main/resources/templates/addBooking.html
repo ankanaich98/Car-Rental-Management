@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+  <title th:text="${formTitle}"></title>
+</head>
+
+<body>
+
+<main layout:fragment="content" >
+
+  <div class="container-fluid px-4">
+
+    <h1 class="mt-4" th:text="${formTitle}">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item active" th:text="${formTitle}">Dashboard</li>
+    </ol>
+
+    <div class="row">
+      <div class="col-5">
+        <div class="card mb-4">
+          <div class="card-header">
+            Booking Entry Form
+          </div>
+          <div class="card-body">
+            <form th:action="@{/booking/save}" th:object="${bookings}" method="post">
+              <input type="hidden" th:field="*{id}">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Customer ID:</label>
+                <div class="col-sm-8">
+                  <input type="text" th:field="*{customer}" class="form-control" required/>
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Car ID:</label>
+                <div class="col-sm-8">
+                  <input type="text" th:field="*{car}" class="form-control" required />
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Booked For:</label>
+                <div class="col-sm-8">
+                  <input type="datetime-local" th:field="*{bookedFor}" class="form-control" required />
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Days booked:</label>
+                <div class="col-sm-8">
+                  <input type="text" th:field="*{daysBooked}" class="form-control" required />
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Pickup:</label>
+                <div class="col-sm-8">
+                  <input type="text" th:field="*{pickup}" class="form-control" required minlength="2" maxlength="50"/>
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Destination:</label>
+                <div class="col-sm-8">
+                  <input type="text" th:field="*{destination}" class="form-control" required minlength="2" maxlength="50"/>
+                </div>
+              </div>
+              <br>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2"  > Save </button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()"> Cancel </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function cancelForm(){
+      window.location="[[@{/bookings}]]" ;
+    }
+  </script>
+</main>
+</body>
+</html>

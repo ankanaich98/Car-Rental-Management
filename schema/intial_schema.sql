@@ -23,7 +23,7 @@ create table cars(
 );
 create table bookings(
                          id bigint primary key not null auto_increment,
-                         booked_on date,
+                         booked_for datetime,
                          days_booked int,
                          customer_id bigint,
                          foreign key (customer_id) references customers(id),
