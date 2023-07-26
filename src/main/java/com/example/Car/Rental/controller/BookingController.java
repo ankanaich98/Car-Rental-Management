@@ -1,8 +1,9 @@
 package com.example.Car.Rental.controller;
 
 import com.example.Car.Rental.entity.Booking;
-import com.example.Car.Rental.entity.Branch;
 import com.example.Car.Rental.service.BookingService;
+import com.example.Car.Rental.service.CarService;
+import com.example.Car.Rental.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,14 @@ import java.util.List;
 @Controller
 public class BookingController {
     private final BookingService bookingService;
+    private final CustomerService customerService;
+
+    private final CarService carService;
     @Autowired
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, CustomerService customerService, CarService carService) {
         this.bookingService = bookingService;
+        this.customerService = customerService;
+        this.carService = carService;
     }
     @GetMapping("/bookings")
     public String showBookingList(Model model){
@@ -31,6 +37,8 @@ public class BookingController {
     public String showForm(Model model){
         model.addAttribute("bookings", new Booking());
         model.addAttribute("formTitle", "Booking Entry");
+        model.addAttribute("customers", customerService.listAllCustomers());
+        model.addAttribute("cars", carService.listAllCars());
         return "addBooking";
     }
     @PostMapping("/booking/save")
@@ -45,6 +53,9 @@ public class BookingController {
         Booking bookings= bookingService.get(id);
         model.addAttribute("bookings", bookings);
 //            model.addAttribute("addBranch","Edit Branch (ID " +id+")" );
+        model.addAttribute("formTitle", "Booking Update");
+        model.addAttribute("customers", customerService.listAllCustomers());
+        model.addAttribute("cars", carService.listAllCars());
         return "addBooking";
     }
     @PostMapping("/booking/delete/{id}")
@@ -54,5 +65,10 @@ public class BookingController {
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/bookings";
     }
+
+    /*@ModelAttribute("customers")
+    public List<Customer> customers() {
+        return customerService.listAllCustomers();
+    }*/
 
 }

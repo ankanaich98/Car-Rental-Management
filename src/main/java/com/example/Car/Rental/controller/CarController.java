@@ -46,6 +46,7 @@ public class CarController {
     public String showEditForm(@PathVariable("id") Long id, Model model){
         Car cars= carService.get(id);
         model.addAttribute("cars", cars);
+        model.addAttribute("formTitle", "Car Update");
         return "addCar";
     }
     @PostMapping("/car/delete/{id}")

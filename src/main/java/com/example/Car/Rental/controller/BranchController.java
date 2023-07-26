@@ -45,6 +45,7 @@ public class BranchController {
     public String showEditForm(@PathVariable("id") Long id, Model model){
             Branch branches= branchService.get(id);
             model.addAttribute("branches", branches);
+        model.addAttribute("formTitle", "Branch Update");
 //            model.addAttribute("addBranch","Edit Branch (ID " +id+")" );
             return "addBranch";
     }

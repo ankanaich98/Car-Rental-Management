@@ -45,6 +45,7 @@ public class CustomerController {
     private String showEditForm(@PathVariable("id") Long id,Model model){
         Customer customers = customerService.get(id);
         model.addAttribute("customers",customers);
+        model.addAttribute("formTitle", "Customer Update");
         return "addCustomer";
     }
     @PostMapping("/customer/delete/{id}")

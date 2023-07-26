@@ -21,22 +21,28 @@
       <div class="col-5">
         <div class="card mb-4">
           <div class="card-header">
-            Booking Entry Form
+            [[${formTitle}]] form
           </div>
           <div class="card-body">
             <form th:action="@{/booking/save}" th:object="${bookings}" method="post">
               <input type="hidden" th:field="*{id}">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label"> Customer ID:</label>
+                <label class="col-sm-4 col-form-label"> Customer:</label>
                 <div class="col-sm-8">
-                  <input type="text" th:field="*{customer}" class="form-control" required/>
+                  <select class="form-select" th:field="*{customer}">
+                    <option value="">-Please Select-</option>
+                    <option th:each="c : ${customers}" th:value="${c.id}" th:text="${c.name}"></option>
+                  </select>
                 </div>
               </div>
               <br>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label"> Car ID:</label>
+                <label class="col-sm-4 col-form-label"> Car:</label>
                 <div class="col-sm-8">
-                  <input type="text" th:field="*{car}" class="form-control" required />
+                  <select class="form-select" th:field="*{car}">
+                    <option value="">-Please Select-</option>
+                    <option th:each="c : ${cars}" th:value="${c.id}" th:text="${c.make} +' '+ ${c.model} +' ' +${c.year} +' | | Registration : '+${c.registration}"></option>
+                  </select>
                 </div>
               </div>
               <br>
