@@ -30,7 +30,7 @@
                 <label class="col-sm-4 col-form-label"> Customer:</label>
                 <div class="col-sm-8">
                   <select class="form-select" th:field="*{customer}">
-                    <option value="">-Please Select-</option>
+                    <option value="" style="color:grey" >-Please Select-</option>
                     <option th:each="c : ${customers}" th:value="${c.id}" th:text="${c.name}"></option>
                   </select>
                 </div>
@@ -40,7 +40,7 @@
                 <label class="col-sm-4 col-form-label"> Car:</label>
                 <div class="col-sm-8">
                   <select class="form-select" th:field="*{car}">
-                    <option value="">-Please Select-</option>
+                    <option value="" style="color:grey">-Please Select-</option>
                     <option th:each="c : ${cars}" th:value="${c.id}" th:text="${c.make} +' '+ ${c.model} +' ' +${c.year} +' | | Registration : '+${c.registration}"></option>
                   </select>
                 </div>

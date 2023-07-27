@@ -37,7 +37,7 @@
             <th>Year</th>
             <th>Registration</th>
             <th>Availability</th>
-            <th>Rate</th>
+            <th>Rate (Per Day)</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -61,7 +61,7 @@
                 <th:block th:text="${car.availability} ? 'Yes' : 'No'"></th:block>
               </td>
               <td>
-                [[${car.rate}]]
+                Tk. [[${car.rate}]]
               </td>
               <td>
                 <a style="text-decoration:none" class="btn btn-primary btn-sm h4 mr-3" role="button" th:href="@{'/car/edit/' +${car.id}}">
