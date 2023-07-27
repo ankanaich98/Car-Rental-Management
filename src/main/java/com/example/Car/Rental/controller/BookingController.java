@@ -1,6 +1,7 @@
 package com.example.Car.Rental.controller;
 
 import com.example.Car.Rental.entity.Booking;
+import com.example.Car.Rental.entity.Car;
 import com.example.Car.Rental.service.BookingService;
 import com.example.Car.Rental.service.CarService;
 import com.example.Car.Rental.service.CustomerService;
@@ -18,7 +19,6 @@ import java.util.List;
 public class BookingController {
     private final BookingService bookingService;
     private final CustomerService customerService;
-
     private final CarService carService;
     @Autowired
     public BookingController(BookingService bookingService, CustomerService customerService, CarService carService) {
@@ -45,6 +45,9 @@ public class BookingController {
     public String saveForm(Booking booking, RedirectAttributes redirectAttributes) {
         String Message = (booking.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
         bookingService.save(booking);
+        Car car = carService.get(booking.getCar().getId());
+        car.setAvailability(false);
+        carService.save(car);
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/bookings";
     }
@@ -60,6 +63,10 @@ public class BookingController {
     }
     @PostMapping("/booking/delete/{id}")
     public String deleteBranch(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+        Booking booking =bookingService.get(id);
+        Car car = carService.get(booking.getCar().getId());
+        car.setAvailability(true);
+        carService.save(car);
         bookingService.delete(id);
         String Message ="Entry deleted Successfully";
         redirectAttributes.addFlashAttribute("Message",Message);
