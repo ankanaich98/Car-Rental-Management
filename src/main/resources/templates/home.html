@@ -10,87 +10,59 @@
 
 <main layout:fragment="content">
     <div class="container-fluid px-4">
-
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
-
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                DataTable Example
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <span class="h4">Customers</span>
+                        <span class="badge rounded-pill bg-white text-dark fs-6">[[${customers}]]</span>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" th:href="@{/customers}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card-body">
-            <table id="datatablesSimple">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Year</th>
-                    <th>Registration</th>
-                    <th>Availability</th>
-                    <th>Rate (Per Day)</th>
-                </tr>
-                </thead>
-                <th:block th:each="car,s: ${cars}" th:if="${car.availability}==true">
-                    <tr>
-                        <td>
-                            [[${s.count}]]
-                        </td>
-                        <td>
-                            [[${car.make}]]
-                        </td>
-                        <td>
-                            [[${car.model}]]
-                        </td>
-                        <td>
-                            [[${car.year}]]
-                        </td>
-                        <td>
-                            [[${car.registration}]]
-                        </td>
-                        <td>
-                            <th:block th:text="${car.availability} ? 'Yes' : 'No'"></th:block>
-                        </td>
-                        <td>
-                            Tk. [[${car.rate}]]
-                        </td>
-                </th:block>
-            </table>
-        </div>
-        <div class="card-body">
-            <table id="datatablesNew">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>License</th>
-                    <th>Contact</th>
-                    <th>E-mail</th>
-                </tr>
-                </thead>
-                <th:block th:each="customer, s: ${customers}">
-                    <tr>
-                        <td>
-                            [[${s.count}]]
-                        </td>
-                        <td>
-                            [[${customer.name}]]
-                        </td>
-                        <td>
-                            [[${customer.license}]]
-                        </td>
-                        <td>
-                            [[${customer.contact}]]
-                        </td>
-                        <td>
-                            [[${customer.email}]]
-                        </td>
-                </th:block>
-            </table>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <span class="h4">Cars</span>
+                        <span class="badge rounded-pill bg-white text-dark fs-6">[[${cars}]]</span>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" th:href="@{/cars}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <span class="h4">Available Cars</span>
+                        <span class="badge rounded-pill bg-white text-dark fs-6">[[${availableCars}]]</span>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" th:href="@{'/cars?isAvailable=true'}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-info text-white mb-4">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <span class="h4">Branches</span>
+                        <span class="badge rounded-pill bg-white text-dark fs-6">[[${branches}]]</span>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" th:href="@{/branches}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>
