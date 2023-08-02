@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,7 +21,7 @@ public class Booking {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDateTime bookedFor;
+    private LocalDate bookedFor;
 
     @Column(nullable = false)
     private Integer daysBooked;
@@ -34,7 +35,7 @@ public class Booking {
     @Column(nullable = false)
     private Long charge;
 
-    @OneToOne()
+    @ManyToOne()
     private Customer customer;
 
     @OneToOne()
