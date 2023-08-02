@@ -1,13 +1,8 @@
 package com.example.Car.Rental;
 
-import com.example.Car.Rental.entity.Booking;
-import com.example.Car.Rental.entity.Branch;
-import com.example.Car.Rental.entity.Car;
-import com.example.Car.Rental.entity.Customer;
-import com.example.Car.Rental.repository.BookingRepository;
-import com.example.Car.Rental.repository.BranchRepository;
-import com.example.Car.Rental.repository.CarRepository;
-import com.example.Car.Rental.repository.CustomerRepository;
+import com.example.Car.Rental.entity.*;
+import com.example.Car.Rental.repository.*;
+import com.example.Car.Rental.enums.Authority;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +20,9 @@ class CarRentalApplicationTests {
     private CustomerRepository customerRepository;
     @Autowired
     private BookingRepository bookingRepository;
+    @Autowired
+    private UserRepository userRepository;
+
 
     @Test
     void contextLoads() {
@@ -75,6 +73,17 @@ class CarRentalApplicationTests {
         booking.setCar(presentCar);
         booking.setCharge(2 * (presentCar.getRate()));
         bookingRepository.save(booking);
+    }
+    @Test
+    public void addNewUser(){
+        User user = new User();
+        user.setName("Ankan");
+        user.setPassword("Aich");
+        user.setRole(Authority.Admin);
+        Optional<Branch> branch = branchRepository.findById(13L);
+        Branch presentBranch = (branch.isPresent()) ? branch.get() : null;
+        user.setBranch(presentBranch);
+        userRepository.save(user);
     }
 
 }

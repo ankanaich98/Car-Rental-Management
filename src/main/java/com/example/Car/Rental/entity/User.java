@@ -1,5 +1,6 @@
 package com.example.Car.Rental.entity;
 
+import com.example.Car.Rental.enums.Authority;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,4 +24,6 @@ public class User {
     @ManyToOne()
     @JoinColumn(referencedColumnName = "id")
     private Branch branch;
+    @Enumerated(EnumType.STRING)
+    private Authority role;
 }

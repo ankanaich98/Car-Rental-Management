@@ -35,7 +35,7 @@
                     <th>Rate (Per Day)</th>
                 </tr>
                 </thead>
-                <th:block th:each="car, s: ${cars}" th:if="${car.availability}==true">
+                <th:block th:each="car,s: ${cars}" th:if="${car.availability}==true">
                     <tr>
                         <td>
                             [[${s.count}]]
@@ -57,6 +57,37 @@
                         </td>
                         <td>
                             Tk. [[${car.rate}]]
+                        </td>
+                </th:block>
+            </table>
+        </div>
+        <div class="card-body">
+            <table id="datatablesNew">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>License</th>
+                    <th>Contact</th>
+                    <th>E-mail</th>
+                </tr>
+                </thead>
+                <th:block th:each="customer, s: ${customers}">
+                    <tr>
+                        <td>
+                            [[${s.count}]]
+                        </td>
+                        <td>
+                            [[${customer.name}]]
+                        </td>
+                        <td>
+                            [[${customer.license}]]
+                        </td>
+                        <td>
+                            [[${customer.contact}]]
+                        </td>
+                        <td>
+                            [[${customer.email}]]
                         </td>
                 </th:block>
             </table>

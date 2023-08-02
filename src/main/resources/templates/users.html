@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+  <title th:text="${formTitle}"></title>
+</head>
+
+<body>
+
+<main layout:fragment="content" >
+  <div class="container-fluid px-4">
+
+    <h1 class="mt-4" th:text="${formTitle}">Dashboard</h1>
+    <div th:if="${Message != null}" class="alert alert-success" role="alert">
+      <span th:text="${Message}"></span>
+    </div>
+
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item active" th:text="${formTitle}">Dashboard</li>
+    </ol>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <a class="btn btn-success" th:href="@{/user/show-form}">
+          <i class="fas fa-plus me-1"></i>
+          New User
+        </a>
+      </div>
+      <div class="card-body">
+        <table id="datatablesSimple">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>Password</th>
+            <th>Branch
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <th:block th:each="user, s: ${users}">
+            <tr>
+              <td>
+                [[${s.count}]]
+              </td>
+              <td>
+                [[${user.name}]]
+              </td>
+              <td>
+                [[${user.password}]]
+              </td>
+              <td>
+                [[${user.branch.name}]]
+              </td>
+              <td>
+                [[${user.role}]]
+              </td>
+              <td>
+                <a style="text-decoration:none" class="btn btn-primary btn-sm h4 mr-3" role="button" th:href="@{'/user/edit/' +${user.id}}">
+                  <i class="fas fa-edit me-1"></i>
+                </a>
+                <a class="btn btn-danger btn-sm h4" role="button" data-bs-toggle="modal" th:attr="data-bs-target='#deleteModal-'+ ${user.id}">
+                  <i class="fas fa-trash me-1"></i>
+                </a>
+                <div class="modal fade" th:attr="id='deleteModal-'+ ${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-triangle-exclamation"></i> Delete User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p class="lead">Do you want to delete entry for '[[${user.name}]]'?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form th:action="@{'/user/delete/' +${user.id}}" th:method="delete">
+                          <button class="btn btn-danger" type="submit" id="submitButton">Yes</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </th:block>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script></script>
+</main>
+</body>
+</html>
