@@ -34,6 +34,7 @@ public class CarController {
         } else {
             listAllCars = carService.listAllCars();
         }
+        //listAllCars = (isAvailable) ? carService.listAllCars().stream().filter(car -> car.isAvailability() == true).collect(Collectors.toList()):carService.listAllCars();
         model.addAttribute("cars",listAllCars);
         model.addAttribute("formTitle", "Car List");
         return "cars";
