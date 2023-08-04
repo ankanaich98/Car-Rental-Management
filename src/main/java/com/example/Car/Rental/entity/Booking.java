@@ -38,7 +38,7 @@ public class Booking {
     @ManyToOne()
     private Customer customer;
 
-    @OneToOne()
+    @ManyToOne()
     private Car car;
 
     @PrePersist
