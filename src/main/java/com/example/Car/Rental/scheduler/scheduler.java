@@ -36,7 +36,7 @@ public class scheduler {
 //        List<Car> cars = carService.listAllCars();
         List<Booking> bookings = bookingService.listAllBookings();
         for (Booking booking: bookings) {
-            if (booking.getBookedFor().isBefore(date)){
+            if (booking.getBookedFor().plusDays(booking.getDaysBooked()).isBefore(date)){
                 Car car = carService.get(booking.getCar().getId());
                 car.setAvailability(true);
                 carRepository.save(car);
