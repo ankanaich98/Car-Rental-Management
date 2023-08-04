@@ -6,8 +6,10 @@ import com.example.Car.Rental.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
@@ -33,6 +35,17 @@ public class BookingService {
     }
     public void delete(Long id){
         bookingRepository.deleteById(id);
+    }
+
+    public List<Booking> listAllForCurrentDate(LocalDate date){
+        List<Booking> allBookings = bookingRepository.findAll();
+//        List<Booking> currentDateBookings = null;
+//        for(Booking booking:allBookings){
+//            if(booking.getBookedFor()==date){
+//                currentDateBookings.add(booking);
+//            }
+//        }
+        return allBookings.stream().filter(booking -> booking.getBookedFor().plusDays(booking.getDaysBooked()).isEqual(date)).collect(Collectors.toList());
     }
 
 }
