@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Getter
@@ -21,6 +23,7 @@ public class Booking {
     private Long id;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate bookedFor;
 
     @Column(nullable = false)
@@ -35,6 +38,9 @@ public class Booking {
     @Column(nullable = false)
     private Long charge;
 
+    @Column(nullable = false)
+    private LocalDate endDate;
+
     @ManyToOne()
     private Customer customer;
 
@@ -42,11 +48,14 @@ public class Booking {
     private Car car;
 
     @PrePersist
-    public void calculateCharge() {
+    public void calculateChargeAndEndDate() {
         charge = getCar().getRate()*daysBooked;
+        endDate=bookedFor.plusDays(daysBooked);
     }
     @PreUpdate
-    public void calculateUpdatedCharge() {
+    public void calculateUpdatedChargeAndEndDate() {
         charge = getCar().getRate()*daysBooked;
+        endDate=bookedFor.plusDays(daysBooked);
     }
+
 }

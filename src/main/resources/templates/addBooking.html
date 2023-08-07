@@ -41,7 +41,8 @@
                 <div class="col-sm-8">
                   <select class="form-select" th:field="*{car}">
                     <option value="" style="color:grey">-Please Select-</option>
-                    <option th:each="car : ${cars}" th:value="${car.id}" th:if="${car.availability}==true" th:text="${car.make} +' '+ ${car.model} +' ' +${car.year} +' | | Registration : '+${car.registration}"></option>
+                    <option th:each="car : ${cars}" th:value="${car.id}" th:if="${bookings.id == null && car.availability == true }" th:text="${car.make} +' '+ ${car.model} +' ' +${car.year} +' | | Registration : '+${car.registration}"></option>
+                    <option th:each="car : ${cars}" th:value="${car.id}" th:unless="${bookings.id == null && car.availability == true }" th:text="${car.make} +' '+ ${car.model} +' ' +${car.year} +' | | Registration : '+${car.registration}"></option>
                   </select>
                 </div>
               </div>
