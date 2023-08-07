@@ -11,23 +11,22 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.util.List;
 
 @Component
-public class scheduler {
+public class Scheduler {
     private final CarService carService;
     private final BookingService bookingService;
     private final CarRepository carRepository;
 
     @Autowired
-    public scheduler(CarRepository carRepository, CarService carService, BookingService bookingService, CarRepository carRepository1) {
+    public Scheduler(CarRepository carRepository, CarService carService, BookingService bookingService, CarRepository carRepository1) {
         this.carService = carService;
         this.bookingService = bookingService;
         this.carRepository = carRepository1;
     }
 
-    @Scheduled(cron = "0 * 19 * * ?")
+    @Scheduled(cron = "0 * 16 * * ?")
     public void cronJobScheduler() {
 //        Date now = new Date();
 //        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");

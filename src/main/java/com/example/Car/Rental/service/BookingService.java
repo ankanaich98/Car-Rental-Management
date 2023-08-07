@@ -22,7 +22,9 @@ public class BookingService {
     public List<Booking> listAllBookings() {
         return (List<Booking>) bookingRepository.findAll();
     }
-
+    public List<Booking> listSearchedBookings(LocalDate dateFrom,LocalDate dateTo) {
+        return (List<Booking>) bookingRepository.findBookingByEndDateBetween(dateFrom,dateTo);
+    }
     public void save(Booking booking){bookingRepository.save(booking);};
     public Booking get(Long id) {
         Optional<Booking> optionalUser = bookingRepository.findById(id);

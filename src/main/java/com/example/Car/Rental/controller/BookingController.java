@@ -11,9 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookingController {
@@ -27,18 +30,27 @@ public class BookingController {
         this.carService = carService;
     }
     @GetMapping("/bookings")
-    public String showBookingList(Model model){
-        List<Booking> listAllBookings = bookingService.listAllBookings();
+    public String showBookingList(@RequestParam(value = "dateFrom",required = false) LocalDate dateFrom,
+                                  @RequestParam(value = "dateTo",required = false) LocalDate dateTo,
+                                  Model model){
+        List<Booking> listAllBookings;
+        if(dateFrom!=null && dateTo!=null){
+            listAllBookings= bookingService.listSearchedBookings(dateFrom,dateTo);
+        }
+        else {
+            listAllBookings=bookingService.listAllBookings();
+        }
         model.addAttribute("bookings",listAllBookings);
         model.addAttribute("formTitle", "Booking List");
         return "bookings";
     }
+
     @GetMapping("/booking/show-form")
     public String showForm(Model model){
         model.addAttribute("bookings", new Booking());
         model.addAttribute("formTitle", "Booking Entry");
         model.addAttribute("customers", customerService.listAllCustomers());
-        model.addAttribute("cars", carService.listAllCars());
+        model.addAttribute("cars", carService.listAllCars().stream().filter(car -> car.isAvailability()).collect(Collectors.toList()));
         return "addBooking";
     }
     @PostMapping("/booking/save")
@@ -58,7 +70,7 @@ public class BookingController {
 //            model.addAttribute("addBranch","Edit Branch (ID " +id+")" );
         model.addAttribute("formTitle", "Booking Update");
         model.addAttribute("customers", customerService.listAllCustomers());
-        model.addAttribute("cars", carService.listAllCars());
+        model.addAttribute("cars", carService.listAllCars().stream().filter(car -> car.isAvailability() || car.getId().equals(bookings.getCar().getId())).collect(Collectors.toList()));
         return "addBooking";
     }
     @PostMapping("/booking/delete/{id}")

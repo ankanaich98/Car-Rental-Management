@@ -28,6 +28,19 @@
                 </a>
             </div>
             <div class="card-body">
+                <form method="get">
+                    <div class="row mb-3">
+                        <div class="col-5 col-lg-5">
+                            <input type="date" class="form-control" name="dateFrom">
+                        </div>
+                        <div class="col-5 col-lg-5">
+                            <input type="date" class="form-control" name="dateTo">
+                        </div>
+                        <div class="col-5 col-lg-2">
+                            <button type="submit" class="btn btn-success">Search</button>
+                        </div>
+                    </div>
+                </form>
                 <table id="datatablesSimple">
                     <thead>
                     <tr>
@@ -75,6 +88,8 @@
                             </td>
                             <td>
                                 [[${booking.endDate}]]
+<!--                                <span th:if="${booking.endDate.isBefore(#dates.createNow())}">Case 1</span>-->
+<!--                                <span th:if="${booking.endDate.isAfter(#dates.createNow())}">Case 2</span>-->
                             </td>
                             <td>
                                TK. [[${booking.charge}]]
