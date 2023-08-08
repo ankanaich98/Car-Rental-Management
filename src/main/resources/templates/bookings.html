@@ -41,8 +41,8 @@
                         </div>
                     </div>
                 </form>
-                <table id="datatablesSimple">
-                    <thead>
+                <table id="datatablesSimple" class="datatable-table">
+                    <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>Customer</th>
@@ -54,11 +54,10 @@
                         <th>End Date</th>
                         <th>Charge</th>
                         <th>Actions</th>
-
                     </tr>
                     </thead>
                     <th:block th:each="booking, s: ${bookings}">
-                        <tr>
+                        <tr th:class="${today > booking.endDate} ? 'table-secondary':'table-success'">
                             <td>
                                 [[${s.count}]]
                             </td>
@@ -87,9 +86,7 @@
                                 [[${booking.daysBooked}]]
                             </td>
                             <td>
-                                [[${booking.endDate}]]
-<!--                                <span th:if="${booking.endDate.isBefore(#dates.createNow())}">Case 1</span>-->
-<!--                                <span th:if="${booking.endDate.isAfter(#dates.createNow())}">Case 2</span>-->
+                                [[${booking.endDate}]] <br>
                             </td>
                             <td>
                                TK. [[${booking.charge}]]

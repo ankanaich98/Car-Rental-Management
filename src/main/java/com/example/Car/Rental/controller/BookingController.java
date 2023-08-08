@@ -42,6 +42,7 @@ public class BookingController {
         }
         model.addAttribute("bookings",listAllBookings);
         model.addAttribute("formTitle", "Booking List");
+        model.addAttribute("today", LocalDate.now());
         return "bookings";
     }
 
