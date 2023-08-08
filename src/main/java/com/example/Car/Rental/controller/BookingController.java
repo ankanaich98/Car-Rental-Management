@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,10 +58,35 @@ public class BookingController {
     @PostMapping("/booking/save")
     public String saveForm(Booking booking, RedirectAttributes redirectAttributes) {
         String Message = (booking.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
-        bookingService.save(booking);
-        Car car = carService.get(booking.getCar().getId());
-        car.setAvailability(false);
-        carService.save(car);
+        if(booking.getId()!=null){
+            Booking oldBooking = bookingService.get(booking.getId());
+            if(!oldBooking.getCar().getId().equals(booking.getCar().getId())){
+                oldBooking.getCar().setAvailability(true);
+                booking.getCar().setAvailability(false);
+                bookingService.save(booking);
+            }
+        }
+        else{
+            bookingService.save(booking);
+            Car car = carService.get(booking.getCar().getId());
+            LocalDate date = LocalDate.from(ZonedDateTime.now());
+            if(!booking.getEndDate().isBefore(date)){
+                car.setAvailability(false);
+            }
+            //car.setAvailability(false);
+
+            carService.save(car);
+        }
+//        bookingService.save(booking);
+//        Car car = carService.get(booking.getCar().getId());
+//        LocalDate date = LocalDate.from(ZonedDateTime.now());
+//        if(!booking.getEndDate().isBefore(date)){
+//            car.setAvailability(false);
+//        }
+//        else {
+//        }
+//        //car.setAvailability(false);
+//        carService.save(car);
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/bookings";
     }
