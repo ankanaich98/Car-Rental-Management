@@ -65,7 +65,15 @@ public class BookingController {
                 booking.getCar().setAvailability(false);
                 bookingService.save(booking);
             }
+            bookingService.save(booking);
+            Car car = carService.get(booking.getCar().getId());
+            LocalDate date = LocalDate.from(ZonedDateTime.now());
+            if (booking.getBookedFor().plusDays(booking.getDaysBooked()).isBefore(date)) {
+                car.setAvailability(true);
+                carService.save(car);
+            }
         }
+
         else{
             bookingService.save(booking);
             Car car = carService.get(booking.getCar().getId());
@@ -77,6 +85,7 @@ public class BookingController {
 
             carService.save(car);
         }
+
 //        bookingService.save(booking);
 //        Car car = carService.get(booking.getCar().getId());
 //        LocalDate date = LocalDate.from(ZonedDateTime.now());

@@ -26,7 +26,7 @@ public class Scheduler {
         this.carRepository = carRepository1;
     }
 
-    @Scheduled(cron = "0 * 16 * * ?")
+    @Scheduled(cron = "0 * 21 * * ?")
     public void cronJobScheduler() {
 //        Date now = new Date();
 //        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
