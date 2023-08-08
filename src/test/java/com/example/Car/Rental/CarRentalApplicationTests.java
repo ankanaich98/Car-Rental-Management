@@ -64,7 +64,7 @@ class CarRentalApplicationTests {
         booking.setPickup("Dhaka");
         booking.setDestination("Chittagong");
         booking.setDaysBooked(2);
-        booking.setBookedFor(LocalDateTime.now());
+//        booking.setBookedFor(LocalDateTime.now());
         Optional<Customer> customer = customerRepository.findById(7L);
         Customer presentCustomer = (customer.isPresent()) ? customer.get() : null;
         booking.setCustomer(presentCustomer);

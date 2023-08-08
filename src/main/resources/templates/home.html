@@ -46,7 +46,8 @@
                         <span class="badge rounded-pill bg-white text-dark fs-6">[[${availableCars}]]</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" th:href="@{'/cars?isAvailable=true'}">View Details</a>
+                        <a class="small text-white stretched-link" th:href="@{'/cars?isAvailable=true'}">View
+                            Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -64,6 +65,80 @@
                 </div>
             </div>
         </div>
+        <div class="datatable-container">
+                <table class="datatable-table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Popular Locations</th>
+                        <th>Bookings</th>
+                        <th>Total Revenue</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            [[${firstDestinationName}]]
+                        </td>
+                        <td>
+                            [[${firstDestinationCount}]]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            [[${secondDestinationName}]]
+                        </td>
+                        <td>
+                            [[${secondDestinationCount}]]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            [[${thirdDestinationName}]]
+                        </td>
+                        <td>
+                            [[${thirdDestinationCount}]]
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="datatable-table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Popular Cars</th>
+                        <th>Bookings</th>
+                        <th>Total Revenue</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            [[${firstCarName}]]
+                        </td>
+                        <td>
+                            [[${firstCarCount}]]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            [[${secondCarName}]]
+                        </td>
+                        <td>
+                            [[${secondCarCount}]]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            [[${thirdCarName}]]
+                        </td>
+                        <td>
+                            [[${thirdCarCount}]]
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+
     </div>
 </main>
 </body>
