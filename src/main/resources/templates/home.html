@@ -67,116 +67,56 @@
         </div>
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <table class="table table-bordered text-center">
-                    <thead class="table-dark">
-                    <!--                    <tr class="text-center">-->
-                    <!--                        <th colspan="3">-->
-                    <!--                            Popular Locations-->
-                    <!--                        </th>-->
-                    <!--                    </tr>-->
-                    <tr>
-                        <th>Destinations</th>
-                        <th>Bookings</th>
-                        <th>Total Revenue</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!--                    <tr>-->
-                    <!--                        <td>-->
-                    <!--                            [[${firstDestinationName}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            [[${firstDestinationCount}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            Tk. [[${firstDestinationRevenue}]]-->
-                    <!--                        </td>-->
-                    <!--                    </tr>-->
-                    <!--                    <tr>-->
-                    <!--                        <td>-->
-                    <!--                            [[${secondDestinationName}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            [[${secondDestinationCount}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            Tk. [[${secondDestinationRevenue}]]-->
-                    <!--                        </td>-->
-                    <!--                    </tr>-->
-                    <!--                    <tr>-->
-                    <!--                        <td>-->
-                    <!--                            [[${thirdDestinationName}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            [[${thirdDestinationCount}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            Tk. [[${thirdDestinationRevenue}]]-->
-                    <!--                        </td>-->
-                    <!--                    </tr>-->
-                    <tr th:each="destination : ${popularDestinationsList}">
-                        <td th:text="${destination.name}"></td>
-                        <td th:text="${destination.count}"></td>
-                        <td th:text="${'Tk. ' + destination.revenue}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fa-solid fa-map-location"></i>
+                        Popular Locations
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered text-center">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Destinations</th>
+                                <th>Bookings</th>
+                                <th>Total Revenue</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="destination : ${popularDestinationsList}">
+                                <td th:text="${destination.name}"></td>
+                                <td th:text="${destination.count}"></td>
+                                <td th:text="${'Tk. ' + destination.revenue}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <table class="table table-bordered text-center">
-                    <thead class="table-dark">
-                    <!--                    <tr class="text-center">-->
-                    <!--                        <th colspan="3">-->
-                    <!--                            Popular Vehicles-->
-                    <!--                        </th>-->
-                    <!--                    </tr>-->
-                    <tr>
-                        <th>Car Models</th>
-                        <th>Bookings</th>
-                        <th>Total Revenue</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!--                    <tr>-->
-                    <!--                        <td>-->
-                    <!--                            [[${firstCarName}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            [[${firstCarCount}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            Tk. [[${firstCarRevenue}]]-->
-                    <!--                        </td>-->
-                    <!--                    </tr>-->
-                    <!--                    <tr>-->
-                    <!--                        <td>-->
-                    <!--                            [[${secondCarName}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            [[${secondCarCount}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            Tk. [[${secondCarRevenue}]]-->
-                    <!--                        </td>-->
-                    <!--                    </tr>-->
-                    <!--                    <tr>-->
-                    <!--                        <td>-->
-                    <!--                            [[${thirdCarName}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            [[${thirdCarCount}]]-->
-                    <!--                        </td>-->
-                    <!--                        <td>-->
-                    <!--                            Tk. [[${thirdCarRevenue}]]-->
-                    <!--                        </td>-->
-                    <!--                    </tr>-->
-                    <tr th:each="car : ${popularCarsList}">
-                        <td th:text="${car.name}"></td>
-                        <td th:text="${car.count}"></td>
-                        <td th:text="${'Tk. ' + car.revenue}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fa-solid fa-car-side"></i>
+                        Popular Vehicles
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered text-center">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Car Models</th>
+                                <th>Bookings</th>
+                                <th>Total Revenue</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="car : ${popularCarsList}">
+                                <td th:text="${car.name}"></td>
+                                <td th:text="${car.count}"></td>
+                                <td th:text="${'Tk. ' + car.revenue}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -184,7 +124,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-pie me-1"></i>
-                        Pie Chart Example
+                        Pie Chart based on Popular Destinations Revenue
                     </div>
                     <div class="card-body">
                         <canvas id="myPieChart" width="100%" height="50"></canvas>
@@ -194,8 +134,8 @@
             <div class="col-lg-6">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-chart-pie me-1"></i>
-                        Pie Chart Example
+                        <i class="fas fa-chart-bar me-1"></i>
+                        Bar Chart based on Popular Cars Revenue
                     </div>
                     <div class="card-body">
                         <canvas id="myBarChart" width="100%" height="50"></canvas>
@@ -205,5 +145,13 @@
         </div>
     </div>
 </main>
+<!--<script>
+    $(document).ready(function() {
+        alert("Hello")
+        /*$.get("/pie-chart", (data) => {
+            alert(JSON.stringify(data))
+        });*/
+    });
+</script>-->
 </body>
 </html>
