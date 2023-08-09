@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -49,6 +50,7 @@ public class HomeController {
         List<String> cars =listAllBookings.stream().map(booking -> booking.getCar().getMake()+" "+booking.getCar().getModel()+" "+booking.getCar().getYear()).collect(Collectors.toList());
 
 
+        NumberFormat revenueFormat = NumberFormat.getInstance();
 
 
         Map<String, Long> frequencyMapDestinations = destinations.stream().collect(Collectors.groupingBy(s -> s, Collectors.counting()));
@@ -59,7 +61,13 @@ public class HomeController {
         Map.Entry<String, Long> firstDestination = sortedDestinations.get(0);
         Map.Entry<String, Long> secondDestination = sortedDestinations.get(1);
         Map.Entry<String, Long> thirdDestination = sortedDestinations.get(2);
+        Double firstDestinationRevenue =listAllBookings.stream().filter(s-> s.getDestination().equals(firstDestination.getKey())).mapToDouble(s -> s.getCharge()).sum();
+        Double secondDestinationRevenue =listAllBookings.stream().filter(s-> s.getDestination().equals(secondDestination.getKey())).mapToDouble(s -> s.getCharge()).sum();
+        Double thirdDestinationRevenue =listAllBookings.stream().filter(s-> s.getDestination().equals(thirdDestination.getKey())).mapToDouble(s -> s.getCharge()).sum();
 
+        model.addAttribute("firstDestinationRevenue",revenueFormat.format(firstDestinationRevenue));
+        model.addAttribute("secondDestinationRevenue",revenueFormat.format(secondDestinationRevenue));
+        model.addAttribute("thirdDestinationRevenue",revenueFormat.format(thirdDestinationRevenue));
         model.addAttribute("firstDestinationName",firstDestination.getKey());
         model.addAttribute("firstDestinationCount",firstDestination.getValue());
         model.addAttribute("secondDestinationName",secondDestination.getKey());
@@ -79,7 +87,13 @@ public class HomeController {
         Map.Entry<String, Long> firstCar = sortedCars.get(0);
         Map.Entry<String, Long> secondCar = sortedCars.get(1);
         Map.Entry<String, Long> thirdCar = sortedCars.get(2);
+        Double firstCarRevenue =listAllBookings.stream().filter(s -> firstCar.getKey().equals(s.getCar().getMake()+" "+s.getCar().getModel()+" "+s.getCar().getYear())).mapToDouble(s -> s.getCharge()).sum();
+        Double secondCarRevenue =listAllBookings.stream().filter(s -> secondCar.getKey().equals(s.getCar().getMake()+" "+s.getCar().getModel()+" "+s.getCar().getYear())).mapToDouble(s -> s.getCharge()).sum();
+        Double thirdCarRevenue =listAllBookings.stream().filter(s -> thirdCar.getKey().equals(s.getCar().getMake()+" "+s.getCar().getModel()+" "+s.getCar().getYear())).mapToDouble(s -> s.getCharge()).sum();
 
+        model.addAttribute("firstCarRevenue",revenueFormat.format(firstCarRevenue));
+        model.addAttribute("secondCarRevenue",revenueFormat.format(secondCarRevenue));
+        model.addAttribute("thirdCarRevenue",revenueFormat.format(thirdCarRevenue));
         model.addAttribute("firstCarName",firstCar.getKey());
         model.addAttribute("firstCarCount",firstCar.getValue());
         model.addAttribute("secondCarName",secondCar.getKey());

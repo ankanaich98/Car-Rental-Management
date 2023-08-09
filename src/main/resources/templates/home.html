@@ -65,11 +65,17 @@
                 </div>
             </div>
         </div>
-        <div class="datatable-container">
-                <table class="datatable-table">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <table class="table table-bordered text-center" >
                     <thead class="table-dark">
+<!--                    <tr class="text-center">-->
+<!--                        <th colspan="3">-->
+<!--                            Popular Locations-->
+<!--                        </th>-->
+<!--                    </tr>-->
                     <tr>
-                        <th>Popular Locations</th>
+                        <th>Destinations</th>
                         <th>Bookings</th>
                         <th>Total Revenue</th>
                     </tr>
@@ -82,6 +88,9 @@
                         <td>
                             [[${firstDestinationCount}]]
                         </td>
+                        <td>
+                            Tk. [[${firstDestinationRevenue}]]
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -89,6 +98,9 @@
                         </td>
                         <td>
                             [[${secondDestinationCount}]]
+                        </td>
+                        <td>
+                            Tk. [[${secondDestinationRevenue}]]
                         </td>
                     </tr>
                     <tr>
@@ -98,14 +110,23 @@
                         <td>
                             [[${thirdDestinationCount}]]
                         </td>
+                        <td>
+                            Tk. [[${thirdDestinationRevenue}]]
+                        </td>
                     </tr>
                     </tbody>
                 </table>
-
-                <table class="datatable-table">
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <table class="table table-bordered text-center">
                     <thead class="table-dark">
+<!--                    <tr class="text-center">-->
+<!--                        <th colspan="3">-->
+<!--                            Popular Vehicles-->
+<!--                        </th>-->
+<!--                    </tr>-->
                     <tr>
-                        <th>Popular Cars</th>
+                        <th>Car Models</th>
                         <th>Bookings</th>
                         <th>Total Revenue</th>
                     </tr>
@@ -118,6 +139,9 @@
                         <td>
                             [[${firstCarCount}]]
                         </td>
+                        <td>
+                            Tk. [[${firstCarRevenue}]]
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -125,6 +149,9 @@
                         </td>
                         <td>
                             [[${secondCarCount}]]
+                        </td>
+                        <td>
+                            Tk. [[${secondCarRevenue}]]
                         </td>
                     </tr>
                     <tr>
@@ -134,11 +161,14 @@
                         <td>
                             [[${thirdCarCount}]]
                         </td>
+                        <td>
+                            Tk. [[${thirdCarRevenue}]]
+                        </td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
         </div>
-
     </div>
 </main>
 </body>
