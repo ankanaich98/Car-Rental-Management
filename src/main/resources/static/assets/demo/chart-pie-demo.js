@@ -7,26 +7,50 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
     // fetch('/pie-chart')
     // .then(response => response.json())
     // .then(data => alert(JSON.stringify(data)));
-let fetchedJsonString;
-let  jsonArray;
+
 fetch('pie-chart')
     .then(response => response.json())
-    .then(data => JSON.stringify(data))
-    .then(jsonString => {
-      fetchedJsonString = jsonString; // Store the JSON string in the variable
-      jsonArray = JSON.parse(fetchedJsonString);
-      var ctx = document.getElementById("myPieChart");
-      var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: [jsonArray[0].name, jsonArray[1].name, jsonArray[2].name, jsonArray[3].name,jsonArray[4].name],
-          datasets: [{
-            data: [parseFloat(jsonArray[0].revenue.replace(/,/g, '')), parseFloat(jsonArray[1].revenue.replace(/,/g, '')), parseFloat(jsonArray[2].revenue.replace(/,/g, '')),parseFloat(jsonArray[3].revenue.replace(/,/g, '')),parseFloat(jsonArray[4].revenue.replace(/,/g, ''))],
-            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745','#800080'],
-          }],
-        },
-      });
+    .then(data => {
+        console.log(JSON.stringify(data));
+        let labels = data.map(a => a.name);
+        let revenue = data.map(a => parseFloat(a['revenue'].replace(/,/g, '')));
+        const backgroundColors = generateRandomHexColors(labels.length);
+        // console.log(labels);
+        // console.log(revenue);
+        // console.log(backgroundColors);
+
+
+        let ctx = document.getElementById("myPieChart");
+        let myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: revenue,
+                    backgroundColor: backgroundColors,
+                }],
+            },
+        });
     });
+
+
+
+function generateRandomHexColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+}
+
+function generateRandomHexColors(count) {
+    let backgroundColor = ['#007bff', '#dc3545', '#ffc107', '#28a745', '#800080'];
+
+    while (backgroundColor.length < count) {
+        const newColor = generateRandomHexColor();
+        if (!backgroundColor.includes(newColor)) {
+            backgroundColor.push(newColor);
+        }
+    }
+
+    return backgroundColor;
+}
 
 /*var objectsFetch = fetch('/pie-chart').then(response => response.json()).then(data => JSON.stringify(data))
 alert(objectsFetch)*/
