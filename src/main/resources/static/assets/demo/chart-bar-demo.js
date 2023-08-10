@@ -15,8 +15,8 @@ fetch('bar-chart')
       // console.log(revenue);
 
 
-      var ctx = document.getElementById("myBarChart");
-      var myLineChart = new Chart(ctx, {
+      let ctx = document.getElementById("myBarChart");
+      let myLineChart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: labels,
@@ -37,7 +37,7 @@ fetch('bar-chart')
                 display: false
               },
               ticks: {
-                maxTicksLimit: 6
+                maxTicksLimit: labels.length
               }
             }],
             yAxes: [{
