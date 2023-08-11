@@ -18,7 +18,7 @@ public class Customer {
     private Long id;
     @Column(nullable = false,length = 50)
     private String name;
-    @Column(nullable = false,length = 10)
+    @Column(nullable = false,length = 20)
     private String license;
     @Column(nullable = false,length = 14)
     private String contact;

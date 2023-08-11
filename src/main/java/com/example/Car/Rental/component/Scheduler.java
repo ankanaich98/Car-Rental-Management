@@ -1,4 +1,4 @@
-package com.example.Car.Rental.scheduler;
+package com.example.Car.Rental.component;
 
 import com.example.Car.Rental.entity.Booking;
 import com.example.Car.Rental.entity.Car;
