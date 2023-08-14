@@ -1,10 +1,10 @@
-package com.example.Car.Rental.component;
+package com.example.Car.Rental.components;
 
-import com.example.Car.Rental.entity.Booking;
-import com.example.Car.Rental.entity.Car;
-import com.example.Car.Rental.repository.CarRepository;
-import com.example.Car.Rental.service.BookingService;
-import com.example.Car.Rental.service.CarService;
+import com.example.Car.Rental.entities.Booking;
+import com.example.Car.Rental.entities.Car;
+import com.example.Car.Rental.repositories.CarRepository;
+import com.example.Car.Rental.services.BookingService;
+import com.example.Car.Rental.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.example.Car.Rental.entity;
+package com.example.Car.Rental.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

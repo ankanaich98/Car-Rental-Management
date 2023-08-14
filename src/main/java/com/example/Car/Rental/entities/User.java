@@ -1,4 +1,4 @@
-package com.example.Car.Rental.entity;
+package com.example.Car.Rental.entities;
 
 import com.example.Car.Rental.enums.Authority;
 import jakarta.persistence.*;

@@ -1,11 +1,8 @@
-package com.example.Car.Rental.controller;
+package com.example.Car.Rental.controllers;
 
-import com.example.Car.Rental.entity.Booking;
-import com.example.Car.Rental.entity.Branch;
-import com.example.Car.Rental.entity.Car;
-import com.example.Car.Rental.entity.User;
-import com.example.Car.Rental.service.BranchService;
-import com.example.Car.Rental.service.UserService;
+import com.example.Car.Rental.entities.User;
+import com.example.Car.Rental.services.BranchService;
+import com.example.Car.Rental.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

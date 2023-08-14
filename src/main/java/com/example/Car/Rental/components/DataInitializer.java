@@ -1,18 +1,16 @@
-package com.example.Car.Rental.component;
+package com.example.Car.Rental.components;
 
-import com.example.Car.Rental.entity.Booking;
-import com.example.Car.Rental.entity.Car;
-import com.example.Car.Rental.entity.Customer;
-import com.example.Car.Rental.repository.BookingRepository;
-import com.example.Car.Rental.repository.CarRepository;
-import com.example.Car.Rental.repository.CustomerRepository;
+import com.example.Car.Rental.entities.Booking;
+import com.example.Car.Rental.entities.Car;
+import com.example.Car.Rental.entities.Customer;
+import com.example.Car.Rental.repositories.BookingRepository;
+import com.example.Car.Rental.repositories.CarRepository;
+import com.example.Car.Rental.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class DataInitializer implements CommandLineRunner {

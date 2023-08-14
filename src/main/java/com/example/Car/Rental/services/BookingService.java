@@ -1,8 +1,7 @@
-package com.example.Car.Rental.service;
+package com.example.Car.Rental.services;
 
-import com.example.Car.Rental.entity.Booking;
-import com.example.Car.Rental.entity.Branch;
-import com.example.Car.Rental.repository.BookingRepository;
+import com.example.Car.Rental.entities.Booking;
+import com.example.Car.Rental.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,13 +1,12 @@
 package com.example.Car.Rental;
 
-import com.example.Car.Rental.entity.*;
-import com.example.Car.Rental.repository.*;
+import com.example.Car.Rental.entities.*;
+import com.example.Car.Rental.repositories.*;
 import com.example.Car.Rental.enums.Authority;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @SpringBootTest

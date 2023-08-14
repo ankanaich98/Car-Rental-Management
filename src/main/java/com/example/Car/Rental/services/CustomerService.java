@@ -1,9 +1,8 @@
-package com.example.Car.Rental.service;
+package com.example.Car.Rental.services;
 
 
-import com.example.Car.Rental.entity.Car;
-import com.example.Car.Rental.entity.Customer;
-import com.example.Car.Rental.repository.CustomerRepository;
+import com.example.Car.Rental.entities.Customer;
+import com.example.Car.Rental.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

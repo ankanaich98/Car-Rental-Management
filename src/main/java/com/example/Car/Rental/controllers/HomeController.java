@@ -1,14 +1,14 @@
-package com.example.Car.Rental.controller;
+package com.example.Car.Rental.controllers;
 
 import com.example.Car.Rental.dtos.PopularRevenueDTO;
-import com.example.Car.Rental.entity.Booking;
-import com.example.Car.Rental.entity.Branch;
-import com.example.Car.Rental.entity.Car;
-import com.example.Car.Rental.entity.Customer;
-import com.example.Car.Rental.service.BookingService;
-import com.example.Car.Rental.service.BranchService;
-import com.example.Car.Rental.service.CarService;
-import com.example.Car.Rental.service.CustomerService;
+import com.example.Car.Rental.entities.Booking;
+import com.example.Car.Rental.entities.Branch;
+import com.example.Car.Rental.entities.Car;
+import com.example.Car.Rental.entities.Customer;
+import com.example.Car.Rental.services.BookingService;
+import com.example.Car.Rental.services.BranchService;
+import com.example.Car.Rental.services.CarService;
+import com.example.Car.Rental.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
