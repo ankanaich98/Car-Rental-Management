@@ -35,6 +35,7 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (bookingRepository.count() == 0) {
             // Insert fixed day names into the database
+            //insertFixedDays();
             for(int i=0;i<5;i++) {
                 Customer customer = new Customer();
                 customer.setName("Dummy Name");
