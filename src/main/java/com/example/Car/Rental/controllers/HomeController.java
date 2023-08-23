@@ -141,7 +141,7 @@ public class HomeController {
 
         return "home";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @RequestMapping(value = "/pie-chart", method = RequestMethod.GET)
     @ResponseBody
     public List<PopularRevenueDTO> getLocationChart() {
@@ -167,7 +167,7 @@ public class HomeController {
 
         return popularDestinationsList;
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @RequestMapping(value = "/bar-chart", method = RequestMethod.GET)
     @ResponseBody
     public List<PopularRevenueDTO> getCarChart() {

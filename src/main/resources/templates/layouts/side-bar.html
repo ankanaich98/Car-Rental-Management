@@ -1,70 +1,76 @@
-<div id="layoutSidenav_nav" class="sidebar" th:fragment="sidemenu" xmlns:th="http://www.thymeleaf.org">
-    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-        <div class="sb-sidenav-menu">
-            <div class="nav">
-                <div class="sb-sidenav-menu-heading">Core</div>
-                <a class="nav-link" th:href="@{/}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Dashboard
-                </a>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsUsers" aria-expanded="false" aria-controls="collapseLayoutsUsers">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Manage Users
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseLayoutsUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" th:href="@{/users}">Users</a>
-                        <a class="nav-link" th:href="@{/user/show-form}">Add New User</a>
-                    </nav>
-                </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsBranches" aria-expanded="false" aria-controls="collapseLayoutsBranches">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Manage Branches
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseLayoutsBranches" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" th:href="@{/branches}">Branches</a>
-                        <a class="nav-link" th:href="@{/branch/show-form}">Add New Branch</a>
-                    </nav>
-                </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCars" aria-expanded="false" aria-controls="collapseLayoutsCars">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Manage Cars
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseLayoutsCars" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" th:href="@{/cars}">Cars</a>
-                        <a class="nav-link" th:href="@{/car/show-form}">Add New Car</a>
-                    </nav>
-                </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCustomers" aria-expanded="false" aria-controls="collapseLayoutsCustomers">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Manage Customers
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseLayoutsCustomers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" th:href="@{/customers}">Customers</a>
-                        <a class="nav-link" th:href="@{/customer/show-form}">Add New Customer</a>
-                    </nav>
-                </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsBookings" aria-expanded="false" aria-controls="collapseLayoutsBookings">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Manage Bookings
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseLayoutsBookings" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" th:href="@{/bookings}">Bookings</a>
-                        <a class="nav-link" th:href="@{/booking/show-form}">Add New Booking</a>
-                    </nav>
-                </div>
+<sec:authorize access="isAuthenticated()" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div id="layoutSidenav_nav" class="sidebar" th:fragment="sidemenu" xmlns:th="http://www.thymeleaf.org">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" th:href="@{/}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <a sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsUsers" aria-expanded="false" aria-controls="collapseLayoutsUsers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Manage Users
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/users}">Users</a>
+                            <a class="nav-link" th:href="@{/user/show-form}">Add New User</a>
+                        </nav>
+                    </div>
+                    <a sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsBranches" aria-expanded="false" aria-controls="collapseLayoutsBranches">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Manage Branches
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsBranches" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/branches}">Branches</a>
+                            <a class="nav-link" th:href="@{/branch/show-form}">Add New Branch</a>
+                        </nav>
+                    </div>
+                    <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCars" aria-expanded="false" aria-controls="collapseLayoutsCars">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Manage Cars
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsCars" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/cars}">Cars</a>
+                            <a class="nav-link" th:href="@{/car/show-form}">Add New Car</a>
+                        </nav>
+                    </div>
+                    <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCustomers" aria-expanded="false" aria-controls="collapseLayoutsCustomers">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Manage Customers
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsCustomers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/customers}">Customers</a>
+                            <a class="nav-link" th:href="@{/customer/show-form}">Add New Customer</a>
+                        </nav>
+                    </div>
+                    <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsBookings" aria-expanded="false" aria-controls="collapseLayoutsBookings">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Manage Bookings
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsBookings" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/bookings}">Bookings</a>
+                            <a class="nav-link" th:href="@{/booking/show-form}">Add New Booking</a>
+                        </nav>
+                    </div>
 
 
+                </div>
             </div>
-        </div>
-    </nav>
-</div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Start Bootstrap
+            </div>
+        </nav>
+    </div>
+</sec:authorize>

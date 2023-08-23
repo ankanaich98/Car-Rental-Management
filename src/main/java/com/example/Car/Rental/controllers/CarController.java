@@ -2,6 +2,7 @@ package com.example.Car.Rental.controllers;
 
 import com.example.Car.Rental.services.CarService;
 import com.example.Car.Rental.entities.Car;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class CarController {
     public CarController(CarService carService) {
         this.carService = carService;
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/cars")
     public String showCarList(@RequestParam(value = "isAvailable", required = false) boolean isAvailable, Model model){
         List<Car> listAllCars;
@@ -37,19 +38,25 @@ public class CarController {
         model.addAttribute("formTitle", "Car List");
         return "cars";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/car/show-form")
     public String showForm(Model model){
         model.addAttribute("cars", new Car());
         model.addAttribute("formTitle", "Car Entry");
         return "addCar";
     }
-    @PostMapping("car/save")
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PostMapping("/car/save")
     public String saveForm(Car car,RedirectAttributes redirectAttributes) {
         String Message = (car.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
         carService.save(car);
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/cars";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/car/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model){
         Car cars= carService.get(id);
@@ -57,6 +64,8 @@ public class CarController {
         model.addAttribute("formTitle", "Car Update");
         return "addCar";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/car/delete/{id}")
     public String deleteCar(@PathVariable("id") Long id,RedirectAttributes redirectAttributes){
         carService.delete(id);

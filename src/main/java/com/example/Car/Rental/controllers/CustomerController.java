@@ -3,6 +3,7 @@ package com.example.Car.Rental.controllers;
 import com.example.Car.Rental.entities.Customer;
 import com.example.Car.Rental.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,9 @@ public class CustomerController {
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
+
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/customers")
     private String showCustomerList(Model model){
         List<Customer> listAllCustomers = customerService.listAllCustomers();
@@ -27,12 +31,16 @@ public class CustomerController {
         model.addAttribute("formTitle","Customer List");
         return "customers";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/customer/show-form")
     private String showForm(Model model){
         model.addAttribute("customers",new Customer());
         model.addAttribute("formTitle","Customer Entry");
         return "addCustomer";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/customer/save")
     private String saveForm(Customer customer,RedirectAttributes redirectAttributes){
         String Message = (customer.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
@@ -41,6 +49,7 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/customer/edit/{id}")
     private String showEditForm(@PathVariable("id") Long id,Model model){
         Customer customers = customerService.get(id);
@@ -48,6 +57,8 @@ public class CustomerController {
         model.addAttribute("formTitle", "Customer Update");
         return "addCustomer";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/customer/delete/{id}")
     private String deleteCustomer(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
       customerService.delete(id);
@@ -55,6 +66,4 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("Message",Message);
       return "redirect:/customers";
     }
-
-
 }

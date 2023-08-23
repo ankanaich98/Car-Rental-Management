@@ -11047,6 +11047,35 @@ body {
   background-color: #343a40;
 }
 
+.sb-sidenav-primary {
+  background-color: #0d6efd;
+  color: rgba(255, 255, 255, 0.8);
+}
+.sb-sidenav-primary .sb-sidenav-menu .sb-sidenav-menu-heading {
+  color: rgb(0, 24, 107);
+}
+.sb-sidenav-primary .sb-sidenav-menu .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+.sb-sidenav-primary .sb-sidenav-menu .nav-link .sb-nav-link-icon {
+  color: rgba(255, 255, 255, 0.8);
+}
+.sb-sidenav-primary .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
+  color: rgba(255, 255, 255, 0.8);
+}
+.sb-sidenav-primary .sb-sidenav-menu .nav-link:hover {
+  color: #002248;
+}
+.sb-sidenav-primary .sb-sidenav-menu .nav-link.active {
+  color: #002248;
+}
+.sb-sidenav-primary .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
+  color: #002248;
+}
+.sb-sidenav-primary .sb-sidenav-footer {
+  background-color: #00488d;
+}
+
 .sb-sidenav-light {
   background-color: #f8f9fa;
   color: #212529;

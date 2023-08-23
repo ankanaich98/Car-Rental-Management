@@ -6,6 +6,7 @@ import com.example.Car.Rental.services.BookingService;
 import com.example.Car.Rental.services.CarService;
 import com.example.Car.Rental.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class BookingController {
         this.customerService = customerService;
         this.carService = carService;
     }
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/bookings")
     public String showBookingList(@RequestParam(value = "dateFrom",required = false) LocalDate dateFrom,
                                   @RequestParam(value = "dateTo",required = false) LocalDate dateTo,
@@ -46,7 +48,7 @@ public class BookingController {
         model.addAttribute("today", LocalDate.now());
         return "bookings";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/booking/show-form")
     public String showForm(Model model){
         model.addAttribute("bookings", new Booking());
@@ -55,6 +57,8 @@ public class BookingController {
         model.addAttribute("cars", carService.listAllCars().stream().filter(car -> car.isAvailability()).collect(Collectors.toList()));
         return "addBooking";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/booking/save")
     public String saveForm(Booking booking, RedirectAttributes redirectAttributes) {
         String Message = (booking.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
@@ -99,6 +103,8 @@ public class BookingController {
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/bookings";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/booking/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model){
         Booking bookings= bookingService.get(id);
@@ -109,6 +115,8 @@ public class BookingController {
         model.addAttribute("cars", carService.listAllCars().stream().filter(car -> car.isAvailability() || car.getId().equals(bookings.getCar().getId())).collect(Collectors.toList()));
         return "addBooking";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/booking/delete/{id}")
     public String deleteBranch(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
         Booking booking =bookingService.get(id);

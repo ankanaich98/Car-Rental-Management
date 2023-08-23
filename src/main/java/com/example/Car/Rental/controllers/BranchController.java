@@ -3,6 +3,7 @@ package com.example.Car.Rental.controllers;
 import com.example.Car.Rental.entities.Branch;
 import com.example.Car.Rental.services.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class BranchController {
     public BranchController(BranchService branchService) {
         this.branchService = branchService;
     }
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/branches")
     public String showBranchList(Model model){
         List<Branch> listAllBranches = branchService.listAllBranches();
@@ -26,13 +28,14 @@ public class BranchController {
         model.addAttribute("formTitle", "Branch List");
         return "branches";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/branch/show-form")
     public String showForm(Model model){
         model.addAttribute("branches", new Branch());
         model.addAttribute("formTitle", "Branch Entry");
         return "addBranch";
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/branch/save")
     public String saveForm(Branch branch, RedirectAttributes redirectAttributes) {
         String Message = (branch.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
@@ -40,6 +43,7 @@ public class BranchController {
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/branches";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/branch/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model){
             Branch branches= branchService.get(id);
@@ -48,6 +52,7 @@ public class BranchController {
 //            model.addAttribute("addBranch","Edit Branch (ID " +id+")" );
             return "addBranch";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/branch/delete/{id}")
     public String deleteBranch(@PathVariable("id") Long id,RedirectAttributes redirectAttributes){
         branchService.delete(id);

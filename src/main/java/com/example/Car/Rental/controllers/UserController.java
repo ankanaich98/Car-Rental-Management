@@ -24,6 +24,7 @@ public class UserController {
         this.userService = userService;
         this.branchService = branchService;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
     public String showUserList(Model model){
         List<User> listAllUsers = userService.listAllUsers();
@@ -31,6 +32,7 @@ public class UserController {
         model.addAttribute("formTitle", "User List");
         return "users";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/user/show-form")
     public String showForm(Model model){
         model.addAttribute("users", new User());
@@ -38,6 +40,7 @@ public class UserController {
         model.addAttribute("branches", branchService.listAllBranches());
         return "addUser";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/user/save")
     public String saveForm(User user, RedirectAttributes redirectAttributes) {
         String Message = (user.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
@@ -45,6 +48,7 @@ public class UserController {
         redirectAttributes.addFlashAttribute("Message",Message);
         return "redirect:/users";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/user/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model){
         User users= userService.get(id);
@@ -53,6 +57,7 @@ public class UserController {
         model.addAttribute("branches", branchService.listAllBranches());
         return "addUser";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/user/delete/{id}")
     public String deleteBranch(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
         userService.delete(id);
