@@ -19,10 +19,12 @@ public class User {
     private Long id;
     @Column(nullable = false, length = 25)
     private String name;
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 25, unique = true)
+    private String username;
+    @Column(nullable = false)
     private String password;
     @ManyToOne()
-    @JoinColumn(referencedColumnName = "id")
+//    @JoinColumn(referencedColumnName = "id")
     private Branch branch;
     @Enumerated(EnumType.STRING)
     private Authority role;

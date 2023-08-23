@@ -78,7 +78,7 @@ class CarRentalApplicationTests {
         User user = new User();
         user.setName("Ankan");
         user.setPassword("Aich");
-        user.setRole(Authority.Admin);
+        user.setRole(Authority.ADMIN);
         Optional<Branch> branch = branchRepository.findById(13L);
         Branch presentBranch = (branch.isPresent()) ? branch.get() : null;
         user.setBranch(presentBranch);

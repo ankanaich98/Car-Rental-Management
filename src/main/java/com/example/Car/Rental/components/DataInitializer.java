@@ -1,13 +1,11 @@
 package com.example.Car.Rental.components;
 
-import com.example.Car.Rental.entities.Booking;
-import com.example.Car.Rental.entities.Car;
-import com.example.Car.Rental.entities.Customer;
-import com.example.Car.Rental.repositories.BookingRepository;
-import com.example.Car.Rental.repositories.CarRepository;
-import com.example.Car.Rental.repositories.CustomerRepository;
+import com.example.Car.Rental.entities.*;
+import com.example.Car.Rental.enums.Authority;
+import com.example.Car.Rental.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -16,16 +14,26 @@ import java.time.LocalDate;
 public class DataInitializer implements CommandLineRunner {
 
     private final CarRepository carRepository;
+
+    private final BranchRepository branchRepository;
+
     private final CustomerRepository customerRepository;
 
     private final BookingRepository bookingRepository;
 
+    private  final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
 
     @Autowired
-    public DataInitializer(CarRepository carRepository, CustomerRepository customerRepository, BookingRepository bookingRepository) {
+    public DataInitializer(CarRepository carRepository, BranchRepository branchRepository, CustomerRepository customerRepository, BookingRepository bookingRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.carRepository = carRepository;
+        this.branchRepository = branchRepository;
         this.customerRepository = customerRepository;
         this.bookingRepository = bookingRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -58,6 +66,23 @@ public class DataInitializer implements CommandLineRunner {
                 booking.setDaysBooked(1+i);
                 bookingRepository.save(booking);
             }
+        }
+
+        if(userRepository.findUserByUsername("ankan") == null) {
+            Branch branch = new Branch();
+            branch.setName("Main Branch");
+            branch.setAddress("Dhaka");
+            branch = branchRepository.saveAndFlush(branch);
+
+            User newUser = new User();
+            newUser.setName("Ankan Aich");
+            newUser.setUsername("ankan");
+            newUser.setBranch(branch);
+            newUser.setRole(Authority.ADMIN);
+
+            newUser.setPassword(passwordEncoder.encode("123456"));
+
+            userRepository.save(newUser);
         }
     }
 

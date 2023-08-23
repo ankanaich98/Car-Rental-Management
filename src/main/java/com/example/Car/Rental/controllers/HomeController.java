@@ -9,12 +9,19 @@ import com.example.Car.Rental.services.BookingService;
 import com.example.Car.Rental.services.BranchService;
 import com.example.Car.Rental.services.CarService;
 import com.example.Car.Rental.services.CustomerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.NumberFormat;
 import java.util.*;
@@ -28,6 +35,8 @@ public class HomeController {
     private final BranchService branchService;
     private final BookingService bookingService;
 
+    SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+
     @Autowired
     public HomeController(CarService carService, CustomerService customerService, BranchService branchService, BookingService bookingService) {
         this.carService = carService;
@@ -36,19 +45,20 @@ public class HomeController {
         this.bookingService = bookingService;
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @RequestMapping("/")
-    public String mainPage(Model model){
+    public String mainPage(Model model) {
         model.addAttribute("formTitle", "Dashboard");
         List<Car> listAllCars = carService.listAllCars();
-        model.addAttribute("cars",listAllCars.size());
-        model.addAttribute("availableCars",listAllCars.stream().filter(car -> car.isAvailability()==true).collect(Collectors.toList()).size());
+        model.addAttribute("cars", listAllCars.size());
+        model.addAttribute("availableCars", listAllCars.stream().filter(car -> car.isAvailability() == true).collect(Collectors.toList()).size());
         List<Customer> listAllCustomers = customerService.listAllCustomers();
-        model.addAttribute("customers",listAllCustomers.size());
+        model.addAttribute("customers", listAllCustomers.size());
         List<Branch> listAllBranches = branchService.listAllBranches();
-        model.addAttribute("branches",listAllBranches.size());
+        model.addAttribute("branches", listAllBranches.size());
         List<Booking> listAllBookings = bookingService.listAllBookings();
         List<String> destinations = listAllBookings.stream().map(booking -> booking.getDestination()).collect(Collectors.toList());
-        List<String> cars =listAllBookings.stream().map(booking -> booking.getCar().getMake()+" "+booking.getCar().getModel()+" "+booking.getCar().getYear()).collect(Collectors.toList());
+        List<String> cars = listAllBookings.stream().map(booking -> booking.getCar().getMake() + " " + booking.getCar().getModel() + " " + booking.getCar().getYear()).collect(Collectors.toList());
 
 
         NumberFormat revenueFormat = NumberFormat.getInstance();
@@ -63,11 +73,11 @@ public class HomeController {
         List<PopularRevenueDTO> popularDestinationsList = new ArrayList<>();
         for (Map.Entry<String, Long> destinationMap :
                 sortedDestinations) {
-            Double destinationRevenue =listAllBookings.stream().filter(s-> s.getDestination().equals(destinationMap.getKey())).mapToDouble(s -> s.getCharge()).sum();
-            PopularRevenueDTO popularDestination = new PopularRevenueDTO(destinationMap.getKey(), destinationMap.getValue(),revenueFormat.format(destinationRevenue));
+            Double destinationRevenue = listAllBookings.stream().filter(s -> s.getDestination().equals(destinationMap.getKey())).mapToDouble(s -> s.getCharge()).sum();
+            PopularRevenueDTO popularDestination = new PopularRevenueDTO(destinationMap.getKey(), destinationMap.getValue(), revenueFormat.format(destinationRevenue));
             popularDestinationsList.add(popularDestination);
         }
-        model.addAttribute("popularDestinationsList",popularDestinationsList);
+        model.addAttribute("popularDestinationsList", popularDestinationsList);
 
         /*Map.Entry<String, Long> firstDestination = sortedDestinations.get(0);
         Map.Entry<String, Long> secondDestination = sortedDestinations.get(1);
@@ -97,8 +107,6 @@ public class HomeController {
 //        model.addAttribute("thirdDestinationCount",thirdDestination.getValue());
 
 
-
-
         Map<String, Long> frequencyMapCars = cars.stream().collect(Collectors.groupingBy(s -> s, Collectors.counting()));
         List<Map.Entry<String, Long>> sortedCars = frequencyMapCars.entrySet().stream()
                 .sorted(Map.Entry.<String, Long>comparingByValue().reversed()).limit(5)
@@ -108,8 +116,8 @@ public class HomeController {
         List<PopularRevenueDTO> popularCarsList = new ArrayList<>();
         for (Map.Entry<String, Long> carMap :
                 sortedCars) {
-            Double carRevenue =listAllBookings.stream().filter(s -> carMap.getKey().equals(s.getCar().getMake()+" "+s.getCar().getModel()+" "+s.getCar().getYear())).mapToDouble(s -> s.getCharge()).sum();
-            PopularRevenueDTO popularDestination = new PopularRevenueDTO(carMap.getKey(), carMap.getValue(),revenueFormat.format(carRevenue));
+            Double carRevenue = listAllBookings.stream().filter(s -> carMap.getKey().equals(s.getCar().getMake() + " " + s.getCar().getModel() + " " + s.getCar().getYear())).mapToDouble(s -> s.getCharge()).sum();
+            PopularRevenueDTO popularDestination = new PopularRevenueDTO(carMap.getKey(), carMap.getValue(), revenueFormat.format(carRevenue));
             popularCarsList.add(popularDestination);
         }
         model.addAttribute("popularCarsList", popularCarsList);
@@ -152,20 +160,21 @@ public class HomeController {
         List<PopularRevenueDTO> popularDestinationsList = new ArrayList<>();
         for (Map.Entry<String, Long> destinationMap :
                 sortedDestinations) {
-            Double destinationRevenue =listAllBookings.stream().filter(s-> s.getDestination().equals(destinationMap.getKey())).mapToDouble(s -> s.getCharge()).sum();
-            PopularRevenueDTO popularDestination = new PopularRevenueDTO(destinationMap.getKey(), destinationMap.getValue(),revenueFormat.format(destinationRevenue));
+            Double destinationRevenue = listAllBookings.stream().filter(s -> s.getDestination().equals(destinationMap.getKey())).mapToDouble(s -> s.getCharge()).sum();
+            PopularRevenueDTO popularDestination = new PopularRevenueDTO(destinationMap.getKey(), destinationMap.getValue(), revenueFormat.format(destinationRevenue));
             popularDestinationsList.add(popularDestination);
         }
 
         return popularDestinationsList;
     }
+
     @RequestMapping(value = "/bar-chart", method = RequestMethod.GET)
     @ResponseBody
     public List<PopularRevenueDTO> getCarChart() {
         NumberFormat revenueFormat = NumberFormat.getInstance();
 
         List<Booking> listAllBookings = bookingService.listAllBookings();
-        List<String> cars =listAllBookings.stream().map(booking -> booking.getCar().getMake()+" "+booking.getCar().getModel()+" "+booking.getCar().getYear()).collect(Collectors.toList());
+        List<String> cars = listAllBookings.stream().map(booking -> booking.getCar().getMake() + " " + booking.getCar().getModel() + " " + booking.getCar().getYear()).collect(Collectors.toList());
 
 
         Map<String, Long> frequencyMapCars = cars.stream().collect(Collectors.groupingBy(s -> s, Collectors.counting()));
@@ -177,11 +186,24 @@ public class HomeController {
         List<PopularRevenueDTO> popularCarsList = new ArrayList<>();
         for (Map.Entry<String, Long> carMap :
                 sortedCars) {
-            Double carRevenue =listAllBookings.stream().filter(s -> carMap.getKey().equals(s.getCar().getMake()+" "+s.getCar().getModel()+" "+s.getCar().getYear())).mapToDouble(s -> s.getCharge()).sum();
-            PopularRevenueDTO popularDestination = new PopularRevenueDTO(carMap.getKey(), carMap.getValue(),revenueFormat.format(carRevenue));
+            Double carRevenue = listAllBookings.stream().filter(s -> carMap.getKey().equals(s.getCar().getMake() + " " + s.getCar().getModel() + " " + s.getCar().getYear())).mapToDouble(s -> s.getCharge()).sum();
+            PopularRevenueDTO popularDestination = new PopularRevenueDTO(carMap.getKey(), carMap.getValue(), revenueFormat.format(carRevenue));
             popularCarsList.add(popularDestination);
         }
 
         return popularCarsList;
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/sign-out")
+    public String performLogout(Authentication authentication, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        // .. perform logout
+        this.logoutHandler.logout(request, response, authentication);
+        redirectAttributes.addFlashAttribute("logout", "You have been logged out");
+        return "redirect:/login";
     }
 }

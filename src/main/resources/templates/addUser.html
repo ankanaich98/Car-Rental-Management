@@ -27,9 +27,16 @@
                         <form th:action="@{/user/save}" th:object="${users}" method="post">
                             <input type="hidden" th:field="*{id}">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label"> Username:</label>
+                                <label class="col-sm-4 col-form-label"> Name:</label>
                                 <div class="col-sm-8">
                                     <input type="text" th:field="*{name}" class="form-control" required />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label"> Username:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" th:field="*{username}" class="form-control" required />
                                 </div>
                             </div>
                             <br>
@@ -55,8 +62,8 @@
                                 <div class="col-sm-8">
                                     <select class="form-select" th:field="*{role}">
                                         <option value="" style="color:grey">-Please Select-</option>
-                                        <option value="Admin">Admin</option>
-                                        <option value="User">User</option>
+                                        <option th:value="${T(com.example.Car.Rental.enums.Authority).ADMIN}" value="Admin">Admin</option>
+                                        <option th:value="${T(com.example.Car.Rental.enums.Authority).USER}" value="User">User</option>
                                     </select>
                                 </div>
                             </div>

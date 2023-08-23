@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Authority {
-    Admin,
-    User;
+    ADMIN,
+    USER;
 
     public List<Authority> getAllAuthority() {
         List<Authority> authorities = new ArrayList<>();
