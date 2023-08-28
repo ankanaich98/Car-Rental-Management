@@ -5,6 +5,7 @@ import com.example.Car.Rental.entities.Booking;
 import com.example.Car.Rental.entities.Branch;
 import com.example.Car.Rental.entities.Car;
 import com.example.Car.Rental.entities.Customer;
+import com.example.Car.Rental.repositories.UserRepository;
 import com.example.Car.Rental.services.BookingService;
 import com.example.Car.Rental.services.BranchService;
 import com.example.Car.Rental.services.CarService;
@@ -35,19 +36,23 @@ public class HomeController {
     private final BranchService branchService;
     private final BookingService bookingService;
 
+    private final UserRepository userRepository;
+
     SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
     @Autowired
-    public HomeController(CarService carService, CustomerService customerService, BranchService branchService, BookingService bookingService) {
+    public HomeController(CarService carService, CustomerService customerService, BranchService branchService, BookingService bookingService, UserRepository userRepository) {
         this.carService = carService;
         this.customerService = customerService;
         this.branchService = branchService;
         this.bookingService = bookingService;
+        this.userRepository = userRepository;
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @RequestMapping("/")
-    public String mainPage(Model model) {
+    public String mainPage(Model model,HttpServletRequest request,Authentication authentication) {
+        request.getSession().setAttribute("loggedInAs",userRepository.findUserByUsername(authentication.getName()).getName());
         model.addAttribute("formTitle", "Dashboard");
         List<Car> listAllCars = carService.listAllCars();
         model.addAttribute("cars", listAllCars.size());
