@@ -25,7 +25,7 @@ public class CustomerController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/customers")
-    private String showCustomerList(Model model){
+    public String showCustomerList(Model model){
         List<Customer> listAllCustomers = customerService.listAllCustomers();
         model.addAttribute("customers",listAllCustomers);
         model.addAttribute("formTitle","Customer List");
@@ -34,7 +34,7 @@ public class CustomerController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/customer/show-form")
-    private String showForm(Model model){
+    public String showForm(Model model){
         model.addAttribute("customers",new Customer());
         model.addAttribute("formTitle","Customer Entry");
         return "addCustomer";
@@ -42,7 +42,7 @@ public class CustomerController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/customer/save")
-    private String saveForm(Customer customer,RedirectAttributes redirectAttributes){
+    public String saveForm(Customer customer,RedirectAttributes redirectAttributes){
         String Message = (customer.getId()!=null) ? "Entry updated Successfully" : "Entry created Successfully";
         customerService.save(customer);
         redirectAttributes.addFlashAttribute("Message",Message);
@@ -51,7 +51,7 @@ public class CustomerController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/customer/edit/{id}")
-    private String showEditForm(@PathVariable("id") Long id,Model model){
+    public String showEditForm(@PathVariable("id") Long id,Model model){
         Customer customers = customerService.get(id);
         model.addAttribute("customers",customers);
         model.addAttribute("formTitle", "Customer Update");
@@ -60,7 +60,7 @@ public class CustomerController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/customer/delete/{id}")
-    private String deleteCustomer(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+    public String deleteCustomer(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
       customerService.delete(id);
         String Message ="Entry deleted Successfully";
         redirectAttributes.addFlashAttribute("Message",Message);

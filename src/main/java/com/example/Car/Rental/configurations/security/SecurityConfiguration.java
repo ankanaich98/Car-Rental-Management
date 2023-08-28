@@ -14,6 +14,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+// this will make the private methods in the controller to give null service
+//if you want to do it move authorizations to the service layer
 public class SecurityConfiguration {
     private final UserDetailsService userDetailsService;
 
